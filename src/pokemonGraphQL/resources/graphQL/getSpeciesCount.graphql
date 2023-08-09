@@ -1,0 +1,7 @@
+query getSpeciesCount ($genName: String) {
+    speciesCount: pokemon_v2_pokemonspecies_aggregate(where: {pokemon_v2_generation: {name: {_eq: $genName}}}) {
+        aggregate {
+            count
+        }
+    }
+}    

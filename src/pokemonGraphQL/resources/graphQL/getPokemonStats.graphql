@@ -1,0 +1,18 @@
+query getPokemonStats {
+    pokemonStats: pokemon_v2_pokemonspecies(where: {name: {_eq: "skitty"}}) {
+        name
+        id
+        pokemon_v2_generation {
+            id
+            name
+        }
+        pokemon_v2_pokemons {
+            pokemon_v2_pokemonabilities {
+                ability_id
+                pokemon_v2_ability {
+                    name
+                }
+            }
+        }
+    }
+}

@@ -8,15 +8,7 @@ Feature: Pokemon GraphQL API Test
     Scenario: Simple Pokemon API query test
         
         # define query and variables
-        * text query =
-        """
-        query getGen3 {
-            gen3_species: pokemon_v2_pokemonspecies(where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}) {
-                name
-                id
-            }
-        }
-        """
+        * def query = read('classpath:src/pokemonGraphQL/resources/graphQL/getGenThree.graphql')
         * def vars = null
 
         # post query
@@ -42,16 +34,7 @@ Feature: Pokemon GraphQL API Test
         # tests the pokemon_v2_pokemonspecies_aggregate query by iterating over selected pokemon generation names - see Examples at the bottom of test scenario
         
         # define query and variables for species count
-        * text query =
-        """
-        query getSpeciesCount ($genName: String) {
-            speciesCount: pokemon_v2_pokemonspecies_aggregate(where: {pokemon_v2_generation: {name: {_eq: $genName}}}) {
-                aggregate {
-                    count
-                }
-            }
-        }    
-        """
+        * def query = read('classpath:src/pokemonGraphQL/resources/graphQL/getSpeciesCount.graphql')
         * def vars = { genName: '<genName>' }
 
         # post query
@@ -61,14 +44,7 @@ Feature: Pokemon GraphQL API Test
         * def speciesCount = get[0] getSpeciesCount.response.data.speciesCount.aggregate.count
 
         # define query and variables for species query
-        * text query =
-        """
-        query getSpecies ($genName: String) {
-            species: pokemon_v2_pokemonspecies(where: {pokemon_v2_generation: {name: {_eq: $genName}}}) {
-                name
-            }
-        }
-        """
+        * def query = read('classpath:src/pokemonGraphQL/resources/graphQL/getSpecies.graphql')
         * def vars = { genName: '<genName>' }
         
         # post query
@@ -91,31 +67,10 @@ Feature: Pokemon GraphQL API Test
 
     Scenario: Test ability - Skitty
         # example of filtering nested JSONs
-        # extract cute-charma bility from response and assert against expected value
+        # extract cute-charm ability from response and assert against expected value
        
         # define query and variables for pokemon stats
-        * text query =
-        """
-        query getPokemonStats {
-            pokemonStats: pokemon_v2_pokemonspecies(where: {name: {_eq: "skitty"}}) {
-                name
-                id
-                pokemon_v2_generation {
-                    id
-                    name
-                }
-                pokemon_v2_pokemons {
-                    pokemon_v2_pokemonabilities {
-                        ability_id
-                        pokemon_v2_ability {
-                            name
-                        }
-                    }
-                }
-            }
-        }
-
-        """
+        * def query = read('classpath:src/pokemonGraphQL/resources/graphQL/getPokemonStats.graphql')
         * def vars = null
 
         # post query

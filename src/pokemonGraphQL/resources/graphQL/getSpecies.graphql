@@ -1,0 +1,5 @@
+query getSpecies ($genName: String) {
+    species: pokemon_v2_pokemonspecies(where: {pokemon_v2_generation: {name: {_eq: $genName}}}) {
+        name
+    }
+}

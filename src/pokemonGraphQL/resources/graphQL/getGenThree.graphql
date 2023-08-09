@@ -1,0 +1,6 @@
+query getGen3 {
+    gen3_species: pokemon_v2_pokemonspecies(where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}) {
+        name
+        id
+    }
+}
